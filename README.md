@@ -1,24 +1,24 @@
 ## smarthome
-alexa-> awslambda->awsiot->raspberrypi->infraredsensor
+alexa->awslambda->awsiot->raspberrypi->infraredsensor
 
 ### alexa
-create custom skill.
+- create custom skill.
 
 ### aws lambda
-create lambda.
-template:alexa-skills-kit-nodejs-factsskill
-set ARN to alexa custom skill endpoint.
-create role:AWSIoTDataAccess,AmazonAPIGatewayPushToCrowdLogs
-edit lambda folder source:endpoints = aws iot endpoint
-deploy.
+- create lambda.
+- template:alexa-skills-kit-nodejs-factsskill
+- set ARN to alexa custom skill endpoint.
+- create role:AWSIoTDataAccess,AmazonAPIGatewayPushToCrowdLogs
+- edit lambda folder source:endpoints = aws iot endpoint
+- deploy.
 
 ### aws iot
-create policy.
-regist raspberrypi.
-download cert,key,rootCA.
+- create policy.
+- regist raspberrypi.
+- download cert,key,rootCA.
 
 ### raspberrypi
-edit homeapp.py:cert,key,endpoint,subprocessshell.
+- edit homeapp.py:cert,key,endpoint,subprocessshell.
 ```bash
 pip install paho.mqtt
 pip install smbus
@@ -29,10 +29,9 @@ python3.5 main.py
 ```
 
 ### infraredsensor
-made by bit-trade-one. ADRSIR
-can learn infrared.
-train infrared with the physical learning button in advance.
-export trained data using adrsirlib.(irdata folder)
+- made by bit-trade-one. ADRSIR
+- train infrared with the physical learning button in advance.
+- export trained data using adrsirlib.(irdata folder)
 ```bash
 # export example.
 ./ircontrol store 0:power 1:volume_up 2:volume_down
