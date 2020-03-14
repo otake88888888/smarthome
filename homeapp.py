@@ -1,3 +1,4 @@
+#!/usr/bin/env python3.5
 import paho.mqtt.client
 import ssl
 import subprocess
@@ -8,10 +9,11 @@ endpoint = ""
 port = 8883
 topic_to = "homeapp/to"
 topic_from = "homeapp/from"
-rootCA = "AmazonRootCA1.pem"
-cert = "xxx-certificate.pem.crt"
-key = "xxx-private.pem.key"
+rootCA = "/home/pi/Source/smarthome/AmazonRootCA1.pem"
+cert = "/home/pi/Source/smarthome/xxx-certificate.pem.crt"
+key = "/home/pi/Source/smarthome/xxx-private.pem.key"
 subprocessshell = '/home/pi/Source/smarthome/ir.sh'
+
 
 # def on_connect(client, userdata, flags, respons_code):
 def on_connect(client, userdata, flags, respons_code):
@@ -35,5 +37,5 @@ if __name__ == '__main__':
     client.on_message = on_message
     client.tls_set(rootCA, certfile=cert, keyfile=key, cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLSv1_2, ciphers=None)
     client.connect(endpoint, port=port, keepalive=60)
-    print("start script")
+    print("StartScript")
     client.loop_forever()

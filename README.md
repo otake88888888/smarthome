@@ -37,27 +37,36 @@ python3.5 main.py
 ./ircontrol store 0:power 1:volume_up 2:volume_down
 ```
 
-### cron
+### systemd
 ```bash
-# enable record cron log. search cron line and remove comment out
-sudo vim /etc/rsyslog.conf
-
-# confirm cron log
-sudo cat /var/log/cron.log
-
-# test cron
-#*/1 * * * * /home/pi/Source/smarthome/shell.sh
-#*/1 * * * * echo "hello" >> /home/pi/Source/test.txt
-
-# startup cron
-@reboot /home/pi/Source/smarthome/starthomeapp.sh
-
-# grant permission
 chmod +x /home/pi/Source/smarthome/starthomeapp.sh
+sudo -s
+vi /etc/systemd/system/homeapp.service
+```
 
+homeapp.service value.
+!user section is important
+```vi
+[Unit]
+Description = homeapp daemon
+
+[Service]
+ExecStart = /home/pi/Source/smarthome/starthomeapp.sh
+Restart = always
+Type = simple
+User=pi
+
+[Install]
+WantedBy = multi-user.target
+```
+
+```bash
+sudo systemctl enable homeapp.service
+sudo systemctl start homeapp.service
+sudo systemctl status homeapp.service
+journalctl -u homeapp.service
 ```
 
 ### todo
-- daemonize homeapp.py. use supervisor.
 - migrate relative path.
 - multi-parameter support
